@@ -7,7 +7,7 @@ This project focuses on enhancing credit risk assessment using machine learning 
 ## 📂 Project Structure
 
 ```
-Credit Risk Assessment/
+AI-Based Credit Risk Assessment/
 │
 ├── app/
 │   ├── app.py             # Flask API for model inference
