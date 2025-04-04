@@ -1,4 +1,4 @@
-# 🧠 Credit Risk Assessment using AI (Supervised Models)
+# 🧠 AI-Based Credit Risk Assessment (Supervised Models)
 
 This project focuses on enhancing credit risk assessment using machine learning techniques. It predicts whether a loan applicant is a **low risk** or **high risk**, aiding banks and financial institutions in making informed lending decisions.
 
@@ -36,7 +36,7 @@ AI-Based Credit Risk Assessment/
 
 ### 1. Clone the Repository
 ```bash
-git clone <repo_url>
+git clone https://github.com/NyasaVishwas/AI-Based-Credit-Risk-Assessment
 cd "Credit Risk Assessment"
 ```
 
