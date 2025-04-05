@@ -55,7 +55,6 @@ features = [
     1 if loan_intent == "PERSONAL" else 0,
     1 if loan_intent == "VENTURE" else 0,
 
-    1 if loan_grade == "A" else 0,
     1 if loan_grade == "B" else 0,
     1 if loan_grade == "C" else 0,
     1 if loan_grade == "D" else 0,
