@@ -1,7 +1,9 @@
 import streamlit as st
-import pandas as np
+import pandas as pd
 import numpy as np
 import joblib
+import matplotlib.pyplot as plt
+import os
 
 # Load models and scaler
 try:
@@ -11,12 +13,17 @@ try:
 except Exception as e:
     st.error(f"Error loading model or scaler: {e}")
     st.stop()
+    
+# Session state for storing prediction history
+if 'prediction_history' not in st.session_state:
+    st.session_state.prediction_history = []
 
 st.title("💳 AI-Based Credit Risk Assessment")
 
-# Model Selection moved above
-st.markdown("### 🔍 **Select a Model for Prediction**")
-model_choice = st.selectbox("Choose a model:", ["Random Forest", "XGBoost"])
+# Select model
+st.markdown("### 🔍 Select Prediction Model:")
+model_option = st.selectbox("Model", ["Random Forest", "XGBoost"])
+model = rf_model if model_option == "Random Forest" else xgb_model
 
 st.markdown("### 🧾 Enter Applicant Details:")
 
@@ -76,14 +83,51 @@ except Exception as e:
 # Predict using selected model
 if st.button("Predict Credit Risk"):
     try:
-        if model_choice == "Random Forest":
+        if model_option == "Random Forest":
             prediction = rf_model.predict(input_scaled)[0]
+            probability = rf_model.predict_proba(input_scaled)[0][1]
         else:
             prediction = xgb_model.predict(input_scaled)[0]
+            probability = xgb_model.predict_proba(input_scaled)[0][1]
 
         if prediction == 0:
-            st.success(f"✅ Approved: Low Risk (Model: {model_choice})")
+            st.success(f"✅ Approved: Low Risk (Model: {model_option})")
         else:
-            st.error(f"❌ Rejected: High Risk (Model: {model_choice})")
+            st.error(f"❌ Rejected: High Risk (Model: {model_option})")
+
+        # Show pie chart of risk probability
+        fig, ax = plt.subplots()
+        ax.pie([probability, 1 - probability],
+               labels=['High Risk', 'Low Risk'],
+               colors=['red', 'green'],
+               autopct='%1.1f%%',
+               startangle=90)
+        ax.axis('equal')
+        st.pyplot(fig)
+
+        # Save to session history
+        st.session_state.prediction_history.append({
+            "Model": model_option,
+            "Age": person_age,
+            "Income": person_income,
+            "Loan": loan_amnt,
+            "Risk (%)": round(probability * 100, 2),
+            "Result": "High Risk" if prediction == 1 else "Low Risk"
+        })
+
     except Exception as e:
         st.error(f"Prediction failed: {e}")
+        
+# Show prediction history chart
+if st.session_state.prediction_history:
+    hist_df = pd.DataFrame(st.session_state.prediction_history)
+    st.markdown("### 📊 Prediction History")
+    st.dataframe(hist_df)
+
+    fig2, ax2 = plt.subplots()
+    ax2.plot(hist_df['Risk (%)'], marker='o', linestyle='-', color='purple')
+    ax2.set_title("Risk Probability Trend")
+    ax2.set_ylabel("Risk (%)")
+    ax2.set_xlabel("Prediction Index")
+    ax2.grid(True)
+    st.pyplot(fig2)
