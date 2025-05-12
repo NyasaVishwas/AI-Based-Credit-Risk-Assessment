@@ -38,7 +38,7 @@ cb_person_cred_hist_length = st.slider("Credit History Length (in years)", 0, 50
 
 # Categorical inputs
 home_ownership = st.selectbox("Home Ownership", ["OTHER", "OWN", "RENT"])
-loan_intent = st.selectbox("Loan Intent", ["EDUCATION", "HOMEIMPROVEMENT", "MEDICAL", "PERSONAL", "VENTURE"])
+loan_intent = st.selectbox("Loan Intent", ["EDUCATION", "HOME IMPROVEMENT", "MEDICAL", "PERSONAL", "VENTURE"])
 loan_grade = st.selectbox("Loan Grade", ["B", "C", "D", "E", "F", "G"])
 default_history = st.selectbox("Default on File", ["No", "Yes"])
 
