@@ -68,11 +68,11 @@ streamlit run app/dashboard.py
 ## 🧾 Features Used in the Model
 - `person_age`
 - `person_income`
-- `person_emp_length` *(slider in dashboard)*
+- `person_emp_length`
 - `loan_amnt`
 - `loan_int_rate`
 - `loan_percent_income`
-- `cb_person_cred_hist_length` *(slider in dashboard)*
+- `cb_person_cred_hist_length`
 - One-hot encoded categorical fields:
   - `person_home_ownership`
   - `loan_intent`
@@ -100,12 +100,14 @@ Prediction is shown on the dashboard based on the input values.
 
 ## 🌐 Tech Stack
 - Python
-- Pandas, NumPy
+- Pandas
+- NumPy
 - Scikit-learn
 - XGBoost
 - Flask
 - Streamlit
-- Matplotlib, Seaborn
+- Matplotlib
+- Seaborn
 
 ---
 
