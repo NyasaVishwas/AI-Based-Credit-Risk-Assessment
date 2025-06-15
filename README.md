@@ -2,7 +2,7 @@
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://credit-risk-assess.streamlit.app)
 
-This project focuses on enhancing credit risk assessment using machine learning techniques. It predicts whether a loan applicant is a **low risk** or **high risk**, aiding banks and financial institutions in making informed lending decisions.
+This project focuses on enhancing credit risk prediction using machine learning techniques. It predicts whether a loan applicant is a **low risk** or **high risk**, aiding banks and financial institutions in making informed lending decisions.
 
 ---
 
